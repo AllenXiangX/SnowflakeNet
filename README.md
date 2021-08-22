@@ -20,7 +20,7 @@ This repository contains the source code for the paper [SnowflakeNet: Point Clou
 We use the [PCN](https://www.shapenet.org/) and [Compeletion3D](http://completion3d.stanford.edu/) datasets in our experiments, which are available below:
 
 - [PCN](https://drive.google.com/drive/folders/1P_W1tz5Q4ZLapUifuOE4rFAZp6L1XTJz)
-- [Completion3D](http://download.cs.stanford.edu/downloads/completion3d/dataset2019.zip)
+- [Completion3D](https://completion3d.stanford.edu/)
 
 The pretrained models on Completion3D and PCN dataset are available as follows:
 
