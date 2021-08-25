@@ -1,7 +1,10 @@
 # SnowflakeNet: Point Cloud Completion by Snowflake Point Deconvolution with Skip-Transformer
 
-This repository contains the source code for the paper [SnowflakeNet: Point Cloud Completion by Snowflake Point Deconvolution with Skip-Transformer](https://arxiv.org/abs/2108.04444). The project page is [here](https://arxiv.org/abs/2108.04444).
-[<img src="pics/network.png" width="100%" alt="Intro pic" />](pics/network.png)
+[Peng Xiang](https://scholar.google.com/citations?user=Bp-ceOAAAAAJ&hl=zh-CN&oi=sra), [Xin Wen](https://scholar.google.com/citations?user=7gcGzs8AAAAJ&hl=zh-CN&oi=sra), [Yu-Shen Liu](http://cgcad.thss.tsinghua.edu.cn/liuyushen/), [Yan-Pei Cao](https://scholar.google.com/citations?user=50194vkAAAAJ&hl=en), Pengfei Wan, Wen Zheng, [Zhizhong Han](https://h312h.github.io/)
+
+-----
+This repository contains the source code for the paper [SnowflakeNet: Point Cloud Completion by Snowflake Point Deconvolution with Skip-Transformer](https://arxiv.org/abs/2108.04444) (ICCV 2021 Oral). The project page is [here](https://arxiv.org/abs/2108.04444).
+
 
 
 ## Cite this work
@@ -14,6 +17,8 @@ This repository contains the source code for the paper [SnowflakeNet: Point Clou
   year={2021}
 }
 ```
+
+[<img src="pics/network.png" width="100%" alt="Intro pic" />](pics/network.png)
 
 ## Datasets
 
