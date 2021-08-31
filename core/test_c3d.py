@@ -19,7 +19,7 @@ def test_net(cfg, epoch_idx=-1, test_data_loader=None, test_writer=None, model=N
         # Set up data loader
         dataset_loader = utils.data_loaders.DATASET_LOADER_MAPPING[cfg.DATASET.TEST_DATASET](cfg)
         test_data_loader = torch.utils.data.DataLoader(dataset=dataset_loader.get_dataset(
-            utils.data_loaders.DatasetSubset.TEST),
+            utils.data_loaders.DatasetSubset.VAL),
                                                        batch_size=1,
                                                        num_workers=cfg.CONST.NUM_WORKERS,
                                                        collate_fn=utils.data_loaders.collate_fn,
