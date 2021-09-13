@@ -168,7 +168,8 @@ def splitting_paths(pcd1, pcd2, inds=None, colors_points=colors_points, colors_p
         else:
             displacements += new_dispacements
 
-    return mesh_point1 + displacements
+    mesh_out = mesh_point1 + displacements
+    return mesh_out
 
 
 def splitting_paths_triple(pcd1, pcd2, pcd3, inds=None, colors_points=colors_points, colors_path1=colors_path1,
@@ -211,7 +212,8 @@ def splitting_paths_triple(pcd1, pcd2, pcd3, inds=None, colors_points=colors_poi
         else:
             displacements += new_dispacements
 
-    return mesh_point1 + displacements
+    mesh_out = mesh_point1 + displacements
+    return mesh_out
 
 
 def Indx_of_range(pcd, rg=[0, 1], axis=0):
@@ -259,5 +261,5 @@ def splittings_by_range(pcd1, pcd2, pcd3,
     idx = idx & idx_2
     print(idx)
 
-    m = splitting_paths_triple(pcd1, pcd2, pcd3, idx)
-    return m
+    mesh_out = splitting_paths_triple(pcd1, pcd2, pcd3, idx)
+    return mesh_out
