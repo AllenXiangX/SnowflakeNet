@@ -39,8 +39,8 @@ this function is for visualizing two steps splitting for points specified by ran
 of a small area in 3D space and don't know the exact point indices, this function will help you. Ranges are determined
 by the visualization boundary on each axis (i.e. range_x, range_y, range_z), and ranges should be within [0, 1]. 
 
-#### visualizing and saving mesh object.
-All the above three function return open3d mesh object, use
+#### Visualizing and saving mesh object.
+All the above three functions return open3d mesh object, use
 ```angular2html
 open3d.visualization.draw_geometries([mesh])
 ```
