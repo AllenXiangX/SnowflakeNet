@@ -69,6 +69,7 @@ __C.DATASET.TRAIN_DATASET                        = 'ShapeNet'
 __C.DATASET.TEST_DATASET                         = 'ShapeNet'
 ```
 
+
 ## Getting Started
 
 To train SnowflakeNet, you can simply use the following command:
@@ -88,6 +89,9 @@ then use the following command:
 python main_*.py --test
 python main_*.py --inference
 ```
+
+## Visualization of point splitting paths
+We provide visualization code for point splitting paths in the *visualization* folder.
 
 ## Acknowledgements
 
