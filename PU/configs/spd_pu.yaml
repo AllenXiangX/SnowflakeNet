@@ -1,0 +1,26 @@
+dataset:
+  train_path: /data1/xp/data/PUGAN/training/PUGAN_poisson_256_poisson_1024.h5
+  test_gt_path: /data1/xp/data/PUGAN/8192_gt_lxc
+  test_input_path: /data1/xp/data/PUGAN/2048_input_lxc
+
+model:
+  up_factors: [1, 2, 2, 1]
+
+
+
+train:
+  batch_size: 64
+  num_workers: 4
+  base_lr: 0.001
+  betas: [.9, .999]
+  gamma: .5
+  save_freq: 25
+  n_epochs: 300
+  save_path: /data1/xp/experiments/PUGAN_spd/supervised/CD_134
+  weights:
+
+
+test:
+  model_path: /data1/xp/experiments/PUGAN/supervised/CD_134/checkpoints/(0.2112-2.534)2021-10-12T11:00:39.563525/ckpt-best-066-2.1119_spd.pth
+  save_output: False
+  save_path: /data1/xp/experiments/PUGAN_spd/supervised/snowflake_inp_lxc_fpx_2048_8192_output

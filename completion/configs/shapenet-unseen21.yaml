@@ -1,0 +1,21 @@
+dataset:
+  name: ShapeNet-Unseen21
+  pc_path: /data1/xp/code/SpareNet/PoinTr/data/ShapeNet55-34/shapenet_pc
+  n_points: 8192
+  data_path: category_files/ShapeNet-Unseen21
+
+model:
+  dim_feat: 512
+  up_factors: [1, 4, 4]
+  num_pc: 256
+  num_p0: 512
+  bounding: True
+  radius: 1.0
+
+test:
+  split: test
+  mode: easy
+  batch_size: 1
+  num_workers: 1
+  loss_func: cd_l2
+  model_path: /data1/xp/experiments/completion/ShapeNet_34/checkpoints/2022-06-09T13:30:21.219561/ckpt-best.pth

@@ -1,0 +1,3 @@
+dataset:
+  name: ShapeNet-34
+  pc_path:

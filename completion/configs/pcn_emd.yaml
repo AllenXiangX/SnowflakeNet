@@ -1,0 +1,46 @@
+dataset:
+  name: PCN
+  category_file_path: /data1/xp/code/SPD/completion/category_files/ShapeNet.json
+  partial_points_path: /data/xp/data/PCN/%s/partial/%s/%s/%02d.pcd
+  complete_points_path: /data/xp/data/PCN/%s/complete/%s/%s.pcd
+  n_points: 2048
+  n_renderings: 8
+
+model:
+  dim_feat: 512
+  up_factors: [1, 4, 8]
+  num_pc: 256
+  num_p0: 512
+  bounding: True
+  radius: 1.0
+
+train:
+  optimizer: {
+    type: Adam,
+    kwargs: {
+      lr: 0.001,
+      weight_decay: 0,
+      betas: [.9, .999]
+    }}
+  scheduler: {
+    type: StepLR,
+    kwargs: {
+      decay_step: 50,
+      gamma: 0.5,
+    }}
+  seed: 2022
+  batch_size: 32
+  num_workers: 4
+  epochs: 400
+  loss_func: emd
+  save_freq: 25
+  out_path:
+  resume: False
+  model_path:
+
+test:
+  split: test
+  batch_size: 1
+  num_workers: 1
+  loss_func: emd
+  model_path: /data1/xp/experiments/completion/pretrained/ckpt-best-pcn-emd.pth

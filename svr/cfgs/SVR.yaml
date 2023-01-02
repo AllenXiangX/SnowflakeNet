@@ -1,0 +1,73 @@
+batch_size: 32
+workers: 8
+nepoch: 400
+load_model: /data1/xp/experiments/SVR/SVR_Snowflake-1118_0007/checkpoints/bestl1_network.pth
+start_epoch: 0
+num_points: 2048
+work_dir: log/
+flag: debug
+loss: cd
+manual_seed: null
+use_mean_feature: False
+step_interval_to_print: 200
+epoch_interval_to_save: 5
+epoch_interval_to_val: 1
+varying_constant: 0.01, 0.1, 0.5, 1
+varying_constant_epochs: 5, 15, 30
+dir_outpath: ./exp
+nk: 20
+nz: 128
+
+# train
+lr: 0.001
+lr_decay: True
+lr_decay_interval: 30
+lr_decay_rate: 0.5
+lr_step_decay_epochs: null
+lr_step_decay_rates: null
+lr_clip: 1.e-6
+optimizer: Adam
+weight_decay: 0
+betas: 0.9, 0.999
+
+model:
+  dim_feat: 128
+  up_factors: [2, 2]
+  num_pc: 512
+  num_p0: 512
+  bounding: True
+  radius: 1.0
+
+layers: 1, 1, 1, 1
+distribution_loss: KLD
+knn_list: "16"
+pk: 10
+local_folding: False
+points_label: True
+num_coarse_raw: 1024
+num_fps: 2048
+num_coarse: 2048
+
+# test
+save_vis: False
+eval_emd: False
+
+# SVR data
+radius: 0.5
+normalization: UnitBall
+shapenet13: True
+SVR: True
+class_choice: ["airplane"]
+number_points: 2048
+number_points_eval: 2048
+random_rotation: False
+data_augmentation_axis_rotation: False
+data_augmentation_random_flips: False
+random_translation: False
+anisotropic_scaling: False
+demo: False
+sample: False
+pointcloud_path: '/data1/xp/data/atlas2/ShapeNetV1PointCloud'
+image_path: '/data1/xp/data/atlas2/ShapeNetV1Renderings'
+cache_path: '/data1/xp/data/atlas2/cache'
+cache_path_test: '/data1/xp/data/atlas2/cache_test'

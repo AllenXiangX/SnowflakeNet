@@ -1,0 +1,45 @@
+dataset:
+  name: Completion3D
+  category_file_path: /data1/xp/code/SPD/completion/category_files/Completion3D.json
+  partial_points_path: /data/xp/data/shapenet/shapenet/%s/partial/%s/%s.h5
+  complete_points_path: /data/xp/data/shapenet/shapenet/%s/gt/%s/%s.h5
+  n_points: 2048
+
+model:
+  dim_feat: 512
+  up_factors: [1, 2, 2]
+  num_pc: 256
+  num_p0: 512
+  bounding: True
+  radius: 1.0
+
+train:
+  optimizer: {
+    type: Adam,
+    kwargs: {
+      lr: 0.001,
+      weight_decay: 0,
+      betas: [.9, .999]
+    }}
+  scheduler: {
+    type: StepLR,
+    kwargs: {
+      decay_step: 50,
+      gamma: 0.5,
+    }}
+  seed: 2022
+  batch_size: 32
+  num_workers: 8
+  epochs: 150
+  loss_func: cd_l2
+  save_freq: 25
+  out_path:
+  resume: False
+  model_path: /data1/xp/experiments/completion/pretrained/ckpt-best-c3d-rec.pth
+
+test:
+  split: val
+  batch_size: 1
+  num_workers: 1
+  loss_func: cd_l2
+  model_path: /data1/xp/experiments/completion/pretrained/ckpt-best-c3d-rec.pth
