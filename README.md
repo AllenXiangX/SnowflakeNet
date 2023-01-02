@@ -7,13 +7,15 @@
 ## [NEWS]
 
 
-- **2022-02 [NEW:tada:]** [SPD](https://arxiv.org/abs/2202.09367), the journal extension of SnowflakeNet, is accepted to [TPAMI 2022](https://ieeexplore.ieee.org/document/9735342). We have extended the application of snowflake point deconvolution to more generative tasks other than point cloud completion, including point cloud [auto-encoding](https://github.com/AllenXiangX/SnowflakeNet/tree/main/generation), [generation](https://github.com/AllenXiangX/SnowflakeNet/tree/main/generation), single view reconstruction ([SVR]((https://github.com/AllenXiangX/SnowflakeNet/tree/main/svr))), and point cloud upsampling ([PU]((https://github.com/AllenXiangX/SnowflakeNet/tree/main/PU))). This repository now contains the code of the ICCV paper and the extra contents of the extended version, including:
+- **2023-01 [NEW:tada:]**  This repository now contains the code of the ICCV paper and the extra contents of the extended version, including:
 
   - Point cloud completion on the [ShapeNet-34/21](https://github.com/AllenXiangX/SnowflakeNet/tree/main/completion/configs/shapenet34.yaml) dataset for [unseen class completion](https://github.com/yuxumin/PoinTr).
   - Point cloud completion on the PCN dataset evaluated under [EMD](https://github.com/AllenXiangX/SnowflakeNet/tree/main/completion/configs/pcn_emd.yaml) metric.
   - Point cloud auto-encoding and novel shape generation, see the [generation](https://github.com/AllenXiangX/SnowflakeNet/tree/main/generation) folder.
   - Single view reconstruction, seed the [svr](https://github.com/AllenXiangX/SnowflakeNet/tree/main/svr) folder.
   - Point cloud upsampling, see the [PU](https://github.com/AllenXiangX/SnowflakeNet/tree/main/PU) folder.
+
+- **2022-10 [NEW:tada:]** [SPD](https://arxiv.org/abs/2202.09367), the journal extension of SnowflakeNet, is accepted to [TPAMI 2022](https://ieeexplore.ieee.org/document/9735342). We have extended the application of snowflake point deconvolution to more generative tasks other than point cloud completion, including point cloud [auto-encoding](https://github.com/AllenXiangX/SnowflakeNet/tree/main/generation), [generation](https://github.com/AllenXiangX/SnowflakeNet/tree/main/generation), single view reconstruction ([SVR]((https://github.com/AllenXiangX/SnowflakeNet/tree/main/svr))), and point cloud upsampling ([PU]((https://github.com/AllenXiangX/SnowflakeNet/tree/main/PU))).
 
 - **2021-10** [SnowflakeNet](https://openaccess.thecvf.com/content/ICCV2021/html/Xiang_SnowflakeNet_Point_Cloud_Completion_by_Snowflake_Point_Deconvolution_With_Skip-Transformer_ICCV_2021_paper.html) is published at [ICCV 2021](https://iccv2021.thecvf.com/), and the code is released!
 
