@@ -27,6 +27,7 @@ train:
       lowest_decay: 0.02  # min lr = lowest_decay * lr
     }}
   epochs: 200
+  gpu: [0]
   batch_size: 32
   num_workers: 8
   loss_func: cd_l2
@@ -42,4 +43,5 @@ test:
   batch_size: 1
   num_workers: 1
   loss_func: cd_l2
+  gpu: [0]
   model_path: /data1/xp/experiments/completion/ShapeNet_34/checkpoints/2022-06-09T13:30:21.219561/ckpt-best.pth

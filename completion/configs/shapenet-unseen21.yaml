@@ -18,4 +18,5 @@ test:
   batch_size: 1
   num_workers: 1
   loss_func: cd_l2
+  gpu: [0]
   model_path: /data1/xp/experiments/completion/ShapeNet_34/checkpoints/2022-06-09T13:30:21.219561/ckpt-best.pth

@@ -5,7 +5,7 @@ import yaml
 from models.utils import fps_subsample, query_knn, grouping_operation
 from easydict import EasyDict as edict
 from loss_functions import chamfer_3DDist
-chamfer_distance = chamfer_3DDist()
+
 
 
 def create_edict(pack):
@@ -66,24 +66,31 @@ def random_subsample(pcd, n_points=256):
     return pcd[batch_idx, idx, :]
 
 
-def chamfer_radius(p1, p2, radius=1.0):
-    d1, d2, _, _ = chamfer_distance(p1, p2)
-    cd_dist = 0.5 * d1 + 0.5 * d2
-    cd_dist = torch.mean(cd_dist, dim=1)
-    cd_dist_norm = cd_dist / radius
-    cd_loss = torch.mean(cd_dist_norm)
-    return cd_loss
+class PULoss:
+    def __init__(self):
+        self.chamfer_distance = chamfer_3DDist()
 
-def get_loss(pcds, gt, radius):
-    """
-    Args:
-        pcds: list of point clouds, [256, 512, 1048, 1048]
-    """
-    p1, p2, p3, p4 = pcds
-    gt_1 = fps_subsample(gt, p1.shape[1])
-    cd_1 = chamfer_radius(p1, gt_1, radius)
 
-    cd_3 = chamfer_radius(p3, gt, radius)
-    cd_4 = chamfer_radius(p4, gt, radius)
 
-    return cd_1 + cd_3 + cd_4, cd_4
+    def chamfer_radius(self, p1, p2, radius=1.0):
+        d1, d2, _, _ = self.chamfer_distance(p1, p2)
+        cd_dist = 0.5 * d1 + 0.5 * d2
+        cd_dist = torch.mean(cd_dist, dim=1)
+        cd_dist_norm = cd_dist / radius
+        cd_loss = torch.mean(cd_dist_norm)
+        return cd_loss
+
+
+    def get_loss(self, pcds, gt, radius):
+        """
+        Args:
+            pcds: list of point clouds, [256, 512, 1048, 1048]
+        """
+        p1, p2, p3, p4 = pcds
+        gt_1 = fps_subsample(gt, p1.shape[1])
+        cd_1 = self.chamfer_radius(p1, gt_1, radius)
+
+        cd_3 = self.chamfer_radius(p3, gt, radius)
+        cd_4 = self.chamfer_radius(p4, gt, radius)
+
+        return cd_1 + cd_3 + cd_4, cd_4

@@ -79,6 +79,8 @@ def train(config):
     elif config.test.loss_func == 'emd':
         multiplier = 1e2
 
+    completion_loss = loss_util.Completionloss(loss_func=config.train.loss_func)
+
     n_batches = len(train_dataloader)
     avg_meter_loss = average_meter.AverageMeter(['loss_partial', 'loss_pc', 'loss_p1', 'loss_p2', 'loss_p3'])
     for epoch_idx in range(init_epoch, config.train.epochs):
@@ -101,7 +103,7 @@ def train(config):
 
 
                 pcds_pred = model(partial)
-                loss_total, losses = loss_util.get_loss(pcds_pred, partial, gt, loss_func=config.train.loss_func)
+                loss_total, losses = completion_loss.get_loss(pcds_pred, partial, gt)
 
                 optimizer.zero_grad()
                 loss_total.backward()
@@ -131,7 +133,7 @@ def train(config):
 
 
         cd_eval = test(config, model=model, test_dataloader=test_dataloader, validation=True,
-                       epoch_idx=epoch_idx, test_writer=val_writer)
+                       epoch_idx=epoch_idx, test_writer=val_writer, completion_loss=completion_loss)
 
         # Save checkpoints
         if epoch_idx % config.train.save_freq == 0 or cd_eval < best_metric:
@@ -151,10 +153,6 @@ def train(config):
     val_writer.close()
 
 
-
-
-
-
 if __name__ == '__main__':
     args = get_args_from_command_line()
 
@@ -164,4 +162,5 @@ if __name__ == '__main__':
     set_seed(config.train.seed)
 
     torch.backends.cudnn.benchmark = True
+    os.environ["CUDA_VISIBLE_DEVICES"] = ','.join(str(x) for x in config.train.gpu)
     train(config)

@@ -18,7 +18,7 @@ crop_ratio = {
     'hard':3/4
 }
 
-def test(config, model=None, test_dataloader=None, epoch_idx=-1, validation=False, test_writer=None):
+def test(config, model=None, test_dataloader=None, epoch_idx=-1, validation=False, test_writer=None, completion_loss=None):
     if test_dataloader is None:
         test_dataloader = builder.make_dataloader(config, config.test.split)
 
@@ -50,6 +50,8 @@ def test(config, model=None, test_dataloader=None, epoch_idx=-1, validation=Fals
     elif config.test.loss_func == 'emd':
         multiplier = 1e2
 
+    if completion_loss is None:
+        completion_loss = loss_util.Completionloss(loss_func=config.test.loss_func)
 
     with tqdm(test_dataloader) as t:
         for model_idx, (taxonomy_id, model_id, data) in enumerate(t):
@@ -70,7 +72,7 @@ def test(config, model=None, test_dataloader=None, epoch_idx=-1, validation=Fals
 
                     # print('gt.shape', gt.shape)
                     # print('p3.shape', pcds_pred[-1].shape)
-                    loss_total, losses = loss_util.get_loss(pcds_pred, partial, gt, loss_func=config.test.loss_func)
+                    loss_total, losses = completion_loss.get_loss(pcds_pred, partial, gt)
 
                     partial_matching = losses[0].item() * multiplier
                     loss_c = losses[1].item() * multiplier
@@ -106,7 +108,7 @@ def test(config, model=None, test_dataloader=None, epoch_idx=-1, validation=Fals
 
                     # print('gt.shape', gt.shape)
                     # print('p3.shape', pcds_pred[-1].shape)
-                    loss_total, losses = loss_util.get_loss(pcds_pred, partial, gt, loss_func=config.test.loss_func)
+                    loss_total, losses = completion_loss.get_loss(pcds_pred, partial, gt)
 
                     partial_matching = losses[0].item() * multiplier
                     loss_c = losses[1].item() * multiplier
@@ -123,9 +125,6 @@ def test(config, model=None, test_dataloader=None, epoch_idx=-1, validation=Fals
                     category_metrics[taxonomy_id].update(_metrics)
             else:
                 raise NotImplementedError(f'Dataset {config.dataset.name} not supported! ')
-
-
-
 
             t.set_description('Test[%d/%d] Taxonomy = %s Sample = %s Losses = %s Metrics = %s' %
                               (model_idx + 1, n_samples, taxonomy_id, model_id,
@@ -175,4 +174,5 @@ if __name__ == '__main__':
 
     config = yaml_reader.read_yaml(args.config)
     torch.backends.cudnn.benchmark = True
+    os.environ["CUDA_VISIBLE_DEVICES"] = ','.join(str(x) for x in config.test.gpu)
     test(config)

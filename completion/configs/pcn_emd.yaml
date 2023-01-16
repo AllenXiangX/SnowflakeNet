@@ -29,6 +29,7 @@ train:
       gamma: 0.5,
     }}
   seed: 2022
+  gpu: [0]
   batch_size: 32
   num_workers: 4
   epochs: 400
@@ -40,6 +41,7 @@ train:
 
 test:
   split: test
+  gpu: [0]
   batch_size: 1
   num_workers: 1
   loss_func: emd

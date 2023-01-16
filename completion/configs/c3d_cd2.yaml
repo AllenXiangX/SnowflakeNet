@@ -28,6 +28,7 @@ train:
       gamma: 0.5,
     }}
   seed: 2022
+  gpu: [0]
   batch_size: 32
   num_workers: 8
   epochs: 150
@@ -41,5 +42,6 @@ test:
   split: val
   batch_size: 1
   num_workers: 1
+  gpu: [0]
   loss_func: cd_l2
   model_path: /data1/xp/experiments/completion/pretrained/ckpt-best-c3d-rec.pth

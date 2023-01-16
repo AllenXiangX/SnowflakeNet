@@ -4,7 +4,7 @@ import torch.nn.functional as F
 from .utils import MLP_Res, build_latent_flow, \
     reparameterize_gaussian, gaussian_entropy, \
     standard_normal_logprob, truncated_normal_, fps_subsample
-from loss_functions import chamfer_l2 as chamfer
+from loss_functions import chamfer_3DDist # chamfer_l2 as chamfer
 from .SPD import SPD
 
 class SeedGenerator(nn.Module):
@@ -128,6 +128,11 @@ class ModelVAE(nn.Module):
         self.flow = build_latent_flow(args)
         self.decoder = Decoder(dim_feat=dim_feat, num_p0=num_p0,
                                radius=radius, up_factors=up_factors, bounding=bounding)
+        self.chamfer_dist = chamfer_3DDist()
+
+    def chamfer_l2(self, p1, p2):
+        d1, d2, _, _ = self.chamfer_dist(p1, p2)
+        return torch.mean(d1) + torch.mean(d2)
 
     def get_loss(self, x, kl_weight, writer=None, it=None):
         """
@@ -152,9 +157,9 @@ class ModelVAE(nn.Module):
 
         x_512 = fps_subsample(x, 512)
 
-        cd_1 = chamfer(p1, x_512)
+        cd_1 = self.chamfer_l2(p1, x_512)
 
-        cd_3 = chamfer(p3, x)
+        cd_3 = self.chamfer_l2(p3, x)
 
         loss_recons = cd_1 + cd_3  # + emd_1 + emd_3  # + cd_2
 

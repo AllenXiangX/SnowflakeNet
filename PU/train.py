@@ -13,7 +13,8 @@ from tensorboardX import SummaryWriter
 from dataset.dataloader import PUGANDataset, PUGANTestset, collate_fn, collate_fn_test
 from models.model_pu import ModelPU
 from test import test
-from utils import get_loss, read_yaml
+from utils import PULoss, read_yaml
+from evaluate import TensorEvaluator
 
 def get_args_from_command_line():
     parser = argparse.ArgumentParser(description='The argument spd_pu of SPD for point cloud upsampling')
@@ -36,7 +37,6 @@ def lr_lambda(epoch):
 
 def train(config):
     # Enable the inbuilt cudnn auto-tuner to find the best algorithm to use
-    torch.backends.cudnn.benchmark = True
 
     train_dataset = PUGANDataset(config.dataset.train_path)
     test_dataset = PUGANTestset(path=config.dataset.test_gt_path, path_inp=config.dataset.test_input_path)
@@ -103,6 +103,8 @@ def train(config):
     lr_scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer,
                                                      lr_lambda=lr_lambda, last_epoch=init_epoch)
 
+    pu_loss = PULoss()
+    tensor_evaluator = TensorEvaluator()
     # Training/Testing the network
     for epoch_idx in range(init_epoch + 1, config.train.n_epochs + 1):
         # metrics = test_net(cfg, epoch_idx, val_data_loader, val_writer, model)
@@ -123,7 +125,7 @@ def train(config):
 
                 pcds = model(inp)
 
-                _loss, loss_cd = get_loss(pcds, gt, radius)
+                _loss, loss_cd = pu_loss.get_loss(pcds, gt, radius)
 
                 optimizer.zero_grad()
                 _loss.backward()
@@ -152,7 +154,7 @@ def train(config):
 
         # Validate the current model
         cd, hd = test(config, model=model, data_loader=test_dataloader, epoch=epoch_idx,
-                      best_cd=best_metrics, path=config.train.save_path)
+                      best_cd=best_metrics, path=config.train.save_path, tensor_evaluator=tensor_evaluator)
 
         val_writer.add_scalar('Loss/Epoch/cd', cd, epoch_idx)
         val_writer.add_scalar('Loss/Epoch/hd', hd, epoch_idx)
@@ -180,4 +182,5 @@ if __name__ == '__main__':
 
     config = read_yaml(args.config)
     torch.backends.cudnn.benchmark = True
+    os.environ["CUDA_VISIBLE_DEVICES"] = ','.join(str(x) for x in config.train.gpu)
     train(config)

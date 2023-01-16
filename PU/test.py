@@ -5,7 +5,7 @@ import torch
 import argparse
 import numpy as np
 from tqdm import tqdm
-from evaluate import evaluate_tensor, normalize_point_cloud
+from evaluate import TensorEvaluator, normalize_point_cloud
 from dataset.dataloader import PUGANTestset, collate_fn_test
 from utils import read_yaml, patch_extraction, fps_subsample
 from models.model_pu import ModelPU
@@ -16,7 +16,7 @@ def get_args_from_command_line():
     args = parser.parse_args()
     return args
 
-def test(config, model=None, data_loader=None, epoch=0, best_cd=0, path=None):
+def test(config, model=None, data_loader=None, epoch=0, best_cd=0, path=None, tensor_evaluator=None):
     inps = []
     preds = []
 
@@ -53,6 +53,8 @@ def test(config, model=None, data_loader=None, epoch=0, best_cd=0, path=None):
         path = config.test.save_path
         save_files = config.test.save_output
     model.eval()
+    if tensor_evaluator is None:
+        tensor_evaluator = TensorEvaluator()
     for (inp, gt, fns) in tqdm(data_loader):
         inp = inp.cuda()
         gt = gt.cuda()
@@ -101,7 +103,7 @@ def test(config, model=None, data_loader=None, epoch=0, best_cd=0, path=None):
     preds_back = torch.cat(preds_back, 0)
     gts = torch.cat(gts, 0)
 
-    cd, hd = evaluate_tensor(preds_back, gts)
+    cd, hd = tensor_evaluator.evaluate(preds_back, gts)
     print('Epoch: ', epoch, 'cd: ', cd*1000, 'hd: ', hd*1000)
 
     if cd < best_cd or save_files:
@@ -141,4 +143,5 @@ if __name__ == '__main__':
 
     config = read_yaml(args.config)
     torch.backends.cudnn.benchmark = True
+    os.environ["CUDA_VISIBLE_DEVICES"] = ','.join(str(x) for x in config.test.gpu)
     test(config)

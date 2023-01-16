@@ -13,7 +13,7 @@ import torch.optim as optim
 from tqdm import tqdm
 from time import time
 
-from utils.model_utils import loss_snowflake, calc_cd
+from utils.model_utils import LossSVR # loss_snowflake, calc_cd
 from utils.train_utils import save_model, AverageValueMeter
 from dataset_svr.trainer_dataset import build_dataset
 from models.model_svr import ModelSVR
@@ -106,6 +106,8 @@ def train():
     best_cd_l1 = float("inf")
     best_cd_l2 = float("inf")
 
+    loss_svr = LossSVR()
+
     for epoch in range(args.start_epoch, args.nepoch):
         epoch_start_time = time()
         total_cd_l1 = 0
@@ -137,10 +139,10 @@ def train():
 
                 pred_points = net(images)
 
-                net_loss, loss_t = calc_cd(pred_points[-1], gt)
+                net_loss, loss_t = loss_svr.calc_cd(pred_points[-1], gt)
 
                 net_loss = net_loss.mean()
-                net_loss_all = loss_snowflake(pred_points, gt)
+                net_loss_all = loss_svr.loss_snowflake(pred_points, gt)
 
                 train_loss_meter.update(net_loss.item())
                 net_loss_all.backward(torch.squeeze(torch.ones(torch.cuda.device_count())).cuda())
@@ -172,7 +174,7 @@ def train():
             best_cd_l1, best_cd_l2 = val(net, epoch, val_loss_meters, dataloader_test, best_epoch_losses, LOG_FOUT, log_dir, best_cd_l1, best_cd_l2)
 
 
-def val(net, curr_epoch_num, val_loss_meters, dataloader_test, best_epoch_losses, LOG_FOUT, log_dir, best_cd_l1, best_cd_l2):
+def val(net, curr_epoch_num, val_loss_meters, dataloader_test, best_epoch_losses, LOG_FOUT, log_dir, best_cd_l1, best_cd_l2, loss_svr=None):
     
     val_start_time = time()
     metrics_val = ['cd_t']
@@ -184,7 +186,11 @@ def val(net, curr_epoch_num, val_loss_meters, dataloader_test, best_epoch_losses
 
     total_cd_l1 = 0
     total_cd_l2 = 0
-    n_batches = len(dataloader_test) 
+    n_batches = len(dataloader_test)
+
+    if loss_svr is None:
+        loss_svr = LossSVR()
+
     with torch.no_grad():
         for i, data in enumerate(dataloader_test):
             
@@ -195,7 +201,7 @@ def val(net, curr_epoch_num, val_loss_meters, dataloader_test, best_epoch_losses
 
             pred_points = net(images)
 
-            loss_p, loss_t = calc_cd(pred_points[-1], gt)
+            loss_p, loss_t = loss_svr.calc_cd(pred_points[-1], gt)
 
             cd_l1_item = loss_p.item() * 1e2
             cd_l2_item = loss_t.item() * 1e4
@@ -238,6 +244,5 @@ if __name__ == "__main__":
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = str(arg.gpu_id)
     print('Using gpu:' + str(arg.gpu_id))
-
     train()
 

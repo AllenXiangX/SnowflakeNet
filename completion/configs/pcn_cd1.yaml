@@ -29,6 +29,7 @@ train:
       gamma: 0.5,
     }}
   seed: 2022
+  gpu: [2]
   batch_size: 32
   num_workers: 4
   epochs: 400
@@ -41,7 +42,8 @@ train:
 
 test:
   split: test
-  batch_size: 1
-  num_workers: 1
+  gpu: [2]
+  batch_size: 16
+  num_workers: 16
   loss_func: cd_l1
   model_path: /data/xp/experiments/snowflake_final/ckpt-best-pcn_r1.pth

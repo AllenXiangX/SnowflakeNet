@@ -9,7 +9,7 @@ import argparse
 
 from tqdm import tqdm
 from utils.train_utils import AverageValueMeter
-from utils.model_utils import calc_cd
+from utils.model_utils import LossSVR
 from dataset_svr.trainer_dataset import build_dataset_val
 from models.model_svr import ModelSVR
 
@@ -50,6 +50,8 @@ def val():
     test_loss_l1 = AverageValueMeter()
     test_loss_l2 = AverageValueMeter()
 
+    loss_svr = LossSVR()
+
     with tqdm(dataloader_test) as t:
         for i, data in enumerate(t):
             with torch.no_grad():
@@ -61,7 +63,7 @@ def val():
                 
                 pred_points = net(images)[-1]
 
-                loss_p, loss_t = calc_cd(pred_points, gt)
+                loss_p, loss_t = loss_svr.calc_cd(pred_points, gt)
 
                 cd_l1_item = loss_p.item()  # torch.sum(loss_p).item() / batch_size
                 cd_l2_item = loss_t.item()  # torch.sum(loss_t).item() / batch_size

@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from .SPD import SPD
 from .utils import MLP_Res, fps_subsample
-from loss_functions import chamfer_l2 as chamfer
+from loss_functions import chamfer_3DDist # chamfer_l2 as chamfer
 
 
 class SeedGenerator(nn.Module):
@@ -126,6 +126,7 @@ class ModelAE(nn.Module):
         self.encoder = PointNetEncoder(zdim=dim_feat)
         self.decoder = Decoder(dim_feat=dim_feat, num_p0=num_p0,
                                radius=radius, up_factors=up_factors, bounding=bounding)
+        self.chamfer_dist = chamfer_3DDist()
         # self.encoder = PointNetEncoder(zdim=args.latent_dim)
         # self.decoder = Decoder(dim_feat=args.latent_dim, up_factors=[2, 2])
 
@@ -148,15 +149,19 @@ class ModelAE(nn.Module):
         p1, p2, p3 = self.decoder(code)
         return p1, p2, p3
 
+    def chamfer_l2(self, p1, p2):
+        d1, d2, _, _ = self.chamfer_dist(p1, p2)
+        return torch.mean(d1) + torch.mean(d2)
+
     def get_loss(self, x):
         code = self.encode(x)
         p1, p2, p3 = self.decoder(code)
 
         x_512 = fps_subsample(x, 512)
 
-        cd_1 = chamfer(p1, x_512)
+        cd_1 = self.chamfer_l2(p1, x_512)
 
-        cd_3 = chamfer(p3, x)
+        cd_3 = self.chamfer_l2(p3, x)
 
         loss = cd_1 + cd_3 #  + emd_1 + emd_3  # + cd_2
         return loss
