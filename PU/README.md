@@ -6,6 +6,8 @@ This repository contains the source code for the papers:
 
 2. SnowflakeNet: Point Cloud Completion by Snowflake Point Deconvolution with Skip-Transformer (ICCV 2021, Oral)
 
+[<img src="../pics/pu.png" width="100%" alt="Intro pic" />](../pics/pu.png)
+
 
 ## Datasets
 
@@ -26,8 +28,6 @@ To use our code, make sure that the environment and PyTorch extensions are insta
 To train a point cloud completion model from scratch, run:
 
 ```
-export CUDA_VISIBLE_DEVICES='0'
-
 python train.py
 ```
 
@@ -37,8 +37,6 @@ python train.py
 To evaluate a pre-trained model, first specify the model_path in configuration file, then run:
 
 ```
-export CUDA_VISIBLE_DEVICES='0'
-
 python test.py
 ```
 

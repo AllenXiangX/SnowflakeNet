@@ -93,12 +93,12 @@ We provide visualization code for point splitting paths in the *visualization* f
 ## Acknowledgements
 
 Some of the code of this repo is borrowed from: 
-- [GRNet](https://github.com/hzxie/GRNet), 
-- [PoinTr](https://github.com/yuxumin/PoinTr),
+- [GRNet](https://github.com/hzxie/GRNet)
+- [PoinTr](https://github.com/yuxumin/PoinTr)
 - [diffusion-point-cloud](https://github.com/luost26/diffusion-point-cloud),
-- [3DAttriFlow](https://github.com/junshengzhou/3DAttriFlow),
-- [PUGAN](https://github.com/liruihui/PU-GAN),
-- [pytorchpointnet++](https://github.com/erikwijmans/Pointnet2_PyTorch), 
+- [3DAttriFlow](https://github.com/junshengzhou/3DAttriFlow)
+- [PUGAN](https://github.com/liruihui/PU-GAN)
+- [pytorchpointnet++](https://github.com/erikwijmans/Pointnet2_PyTorch)
 - [ChamferDistancePytorch](https://github.com/ThibaultGROUEIX/ChamferDistancePytorch)
 - [EMD](https://github.com/Colin97/MSN-Point-Cloud-Completion/tree/master/emd)
 

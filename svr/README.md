@@ -6,7 +6,7 @@ This repository contains the source code of single view reconstruction and of th
 
 2. SnowflakeNet: Point Cloud Completion by Snowflake Point Deconvolution with Skip-Transformer (ICCV 2021, Oral)
 
-
+[<img src="../pics/svr.png" width="100%" alt="Intro pic" />](../pics/svr.png)
 
 ## Datasets
 
@@ -25,9 +25,7 @@ To use our code, make sure that the environment and PyTorch extensions are insta
 To train a svr model from scratch, run:
 
 ```
-export CUDA_VISIBLE_DEVICES='0'
-
-python train_svr.py -c cfgs/SVR.yaml
+python train_svr.py -c cfgs/SVR.yaml -gpu 0
 ```
 
 
@@ -36,9 +34,8 @@ python train_svr.py -c cfgs/SVR.yaml
 To evaluate a pre-trained model, first specify the "load_model" path in cfgs/SVR.yaml, then run:
 
 ```
-export CUDA_VISIBLE_DEVICES='0'
 
-python val_svr.py
+python val_svr.py -c cfgs/SVR.yaml -gpu 0
 ```
 
 ## Acknowledgements
