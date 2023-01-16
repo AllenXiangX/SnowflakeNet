@@ -6,7 +6,7 @@ This repository contains the source code of single view reconstruction and of th
 
 2. SnowflakeNet: Point Cloud Completion by Snowflake Point Deconvolution with Skip-Transformer (ICCV 2021, Oral)
 
-[<img src="../pics/svr.png" width="100%" alt="Intro pic" />](../pics/svr.png)
+[<img src="../pics/svr.png" width="70%" alt="Intro pic" />](../pics/svr.png)
 
 ## Datasets
 

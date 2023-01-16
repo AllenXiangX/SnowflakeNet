@@ -6,7 +6,7 @@ This repository contains the source code of point cloud auto-encoding and genera
 
 2. SnowflakeNet: Point Cloud Completion by Snowflake Point Deconvolution with Skip-Transformer (ICCV 2021, Oral)
 
-[<img src="../pics/generation.png" width="100%" alt="Intro pic" />](../pics/generation.png)
+[<img src="../pics/generation.png" width="70%" alt="Intro pic" />](../pics/generation.png)
 
 
 ## Datasets
