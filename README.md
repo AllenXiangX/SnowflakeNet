@@ -86,6 +86,16 @@ cd ../emd
 python setup.py install
 ```
 
+#### Pre-trained models
+We provided the pretrained models on different tasks:
+
+- [SnowflakeNet_pre-trained](https://drive.google.com/drive/folders/1mdA-6ZwzXAbaWJ6fmfL9-gl3aGTGTWyR)
+
+Backup Links:
+
+- [SnowflakeNet_pre-trained](https://pan.baidu.com/s/10tkqJfMdWO9GkzXSBSNlIw) (pwd: oy5c)
+
+
 ## Visualization of point splitting paths
 We provide visualization code for point splitting paths in the *visualization* folder.
 
