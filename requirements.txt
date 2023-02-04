@@ -14,3 +14,5 @@ einops
 munch
 termcolor
 pymesh
+pyyaml
+tensorboard

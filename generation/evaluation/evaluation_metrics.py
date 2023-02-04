@@ -8,13 +8,18 @@ from numpy.linalg import norm
 from tqdm.auto import tqdm
 
 sys.path.append('..')
-from loss_functions import chamfer_dist as chamfer
+from loss_functions import chamfer_3DDist  # chamfer_dist as chamfer
+
+chamfer = chamfer_3DDist()
 
 
 def distChamferCUDA(x, y):
     return chamfer(x, y)[:2]
 
+
 _EMD_NOT_IMPL_WARNED = False
+
+
 def emd_approx(sample, ref):
     global _EMD_NOT_IMPL_WARNED
     emd = torch.zeros([sample.size(0)]).to(sample)
@@ -26,6 +31,7 @@ def emd_approx(sample, ref):
         print('  * You may implement your own EMD in the function `emd_approx` in ./evaluation/evaluation_metrics.py')
         print('\n')
     return emd
+
 
 # Borrow from https://github.com/ThibaultGROUEIX/AtlasNet
 def distChamfer(a, b):
@@ -187,10 +193,10 @@ def lgan_mmd_cov_match(all_dist):
     cov = float(min_idx.unique().view(-1).size(0)) / float(N_ref)
     cov = torch.tensor(cov).to(all_dist)
     return {
-        'lgan_mmd': mmd,
-        'lgan_cov': cov,
-        'lgan_mmd_smp': mmd_smp,
-    }, min_idx.view(-1)
+               'lgan_mmd': mmd,
+               'lgan_cov': cov,
+               'lgan_mmd_smp': mmd_smp,
+           }, min_idx.view(-1)
 
 
 def compute_all_metrics(sample_pcs, ref_pcs, batch_size, accelerated_cd=False):
@@ -361,4 +367,3 @@ if __name__ == '__main__':
     a = torch.randn([16, 2048, 3]).cuda()
     b = torch.randn([16, 2048, 3]).cuda()
     print(EMD_CD(a, b, batch_size=8))
-    

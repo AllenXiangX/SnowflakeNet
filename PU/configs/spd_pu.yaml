@@ -14,6 +14,7 @@ train:
   base_lr: 0.001
   betas: [.9, .999]
   gamma: .5
+  gpu: [1]
   save_freq: 25
   n_epochs: 300
   save_path: /data1/xp/experiments/PUGAN_spd/supervised/CD_134
@@ -21,6 +22,7 @@ train:
 
 
 test:
+  gpu: [1]
   model_path: /data1/xp/experiments/PUGAN/supervised/CD_134/checkpoints/(0.2112-2.534)2021-10-12T11:00:39.563525/ckpt-best-066-2.1119_spd.pth
   save_output: False
   save_path: /data1/xp/experiments/PUGAN_spd/supervised/snowflake_inp_lxc_fpx_2048_8192_output
