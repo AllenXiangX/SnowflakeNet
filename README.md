@@ -6,7 +6,7 @@
 
 ## [NEWS]
 
-
+- **2022-02 [NEW:tada:]** The [Jittor](https://cg.cs.tsinghua.edu.cn/jittor/) implementations of SPD are released in the [SPD_jittor](https://github.com/AllenXiangX/SPD_jittor) repo.
 - **2023-01 [NEW:tada:]**  This repository now contains the code of the ICCV paper and the extra contents of the extended version, including:
 
   - Point cloud completion on the [ShapeNet-34/21](https://github.com/AllenXiangX/SnowflakeNet/tree/main/completion/configs/shapenet34.yaml) dataset for [unseen class completion](https://github.com/yuxumin/PoinTr).
