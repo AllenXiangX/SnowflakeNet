@@ -1,4 +1,4 @@
-# Snowflake Point Deconvolution for Point Cloud Completion and Generation with Skip-Transformer (TPAMI 2022)
+# Snowflake Point Deconvolution for Point Cloud Completion and Generation with Skip-Transformer (TPAMI 2023)
 
 [Peng Xiang*](https://scholar.google.com/citations?user=Bp-ceOAAAAAJ&hl=zh-CN&oi=sra), [Xin Wen*](https://scholar.google.com/citations?user=7gcGzs8AAAAJ&hl=zh-CN&oi=sra), [Yu-Shen Liu](http://cgcad.thss.tsinghua.edu.cn/liuyushen/), [Yan-Pei Cao](https://scholar.google.com/citations?user=50194vkAAAAJ&hl=en), Pengfei Wan, Wen Zheng, [Zhizhong Han](https://h312h.github.io/)
 
@@ -15,13 +15,13 @@
   - Single view reconstruction, seed the [svr](https://github.com/AllenXiangX/SnowflakeNet/tree/main/svr) folder.
   - Point cloud upsampling, see the [PU](https://github.com/AllenXiangX/SnowflakeNet/tree/main/PU) folder.
 
-- **2022-10 [NEW:tada:]** [SPD](https://arxiv.org/abs/2202.09367), the journal extension of SnowflakeNet, is accepted to [TPAMI 2022](https://ieeexplore.ieee.org/document/9735342). We have extended the application of snowflake point deconvolution to more generative tasks other than point cloud completion, including point cloud [auto-encoding](https://github.com/AllenXiangX/SnowflakeNet/tree/main/generation), [generation](https://github.com/AllenXiangX/SnowflakeNet/tree/main/generation), single view reconstruction ([SVR]((https://github.com/AllenXiangX/SnowflakeNet/tree/main/svr))), and point cloud upsampling ([PU]((https://github.com/AllenXiangX/SnowflakeNet/tree/main/PU))).
+- **2022-10 [NEW:tada:]** [SPD](https://arxiv.org/abs/2202.09367), the journal extension of SnowflakeNet, is accepted to [TPAMI](https://ieeexplore.ieee.org/document/9735342). We have extended the application of snowflake point deconvolution to more generative tasks other than point cloud completion, including point cloud [auto-encoding](https://github.com/AllenXiangX/SnowflakeNet/tree/main/generation), [generation](https://github.com/AllenXiangX/SnowflakeNet/tree/main/generation), single view reconstruction ([SVR]((https://github.com/AllenXiangX/SnowflakeNet/tree/main/svr))), and point cloud upsampling ([PU]((https://github.com/AllenXiangX/SnowflakeNet/tree/main/PU))).
 
 - **2021-10** [SnowflakeNet](https://openaccess.thecvf.com/content/ICCV2021/html/Xiang_SnowflakeNet_Point_Cloud_Completion_by_Snowflake_Point_Deconvolution_With_Skip-Transformer_ICCV_2021_paper.html) is published at [ICCV 2021](https://iccv2021.thecvf.com/), and the code is released!
 
 ## [SPD]
 
-**1. Snowflake Point Deconvolution for Point Cloud Completion and Generation with Skip-Transformer (TPAMI 2022)**
+**1. Snowflake Point Deconvolution for Point Cloud Completion and Generation with Skip-Transformer (TPAMI 2023)**
 
 **2. SnowflakeNet: Point Cloud Completion by Snowflake Point Deconvolution with Skip-Transformer (ICCV 2021, Oral)**
 
