@@ -38,7 +38,7 @@ under widely used benchmarks.
 ## [Cite this work]
 
 ```
-@ARTICLE{xiang2022SPD,
+@ARTICLE{xiang2023SPD,
   author={Xiang, Peng and Wen, Xin and Liu, Yu-Shen and Cao, Yan-Pei and Wan, Pengfei and Zheng, Wen and Han, Zhizhong},
   journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
   title={Snowflake Point Deconvolution for Point Cloud Completion and Generation With Skip-Transformer}, 
