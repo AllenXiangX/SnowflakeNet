@@ -41,11 +41,11 @@ under widely used benchmarks.
 @ARTICLE{xiang2022SPD,
   author={Xiang, Peng and Wen, Xin and Liu, Yu-Shen and Cao, Yan-Pei and Wan, Pengfei and Zheng, Wen and Han, Zhizhong},
   journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
-  title={Snowflake Point Deconvolution for Point Cloud Completion and Generation with Skip-Transformer}, 
-  year={2022},
-  volume={},
-  number={},
-  pages={1-18},
+  title={Snowflake Point Deconvolution for Point Cloud Completion and Generation With Skip-Transformer}, 
+  year={2023},
+  volume={45},
+  number={5},
+  pages={6320-6338},
   doi={10.1109/TPAMI.2022.3217161}}
 
 @inproceedings{xiang2021snowflakenet,
